@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import extract_posts from './post.js'
+import FetchPost from './fetchPost.js'
 
 function Welcome(props) {
     return (
@@ -50,10 +51,7 @@ class Page extends React.Component {
     return (
       <div className="board">
           <Welcome />
-          <Post 
-              value="aaa"
-              posts = {extract_posts('aww')}
-          />
+          <FetchPost />
           <Next />
       </div>
     );
