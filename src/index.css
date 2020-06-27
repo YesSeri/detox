@@ -1,5 +1,13 @@
-.board {
+.mainContainer {
     background-color: aliceblue;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
+    margin:auto;
+}
+.postContainer {
+    background-color:antiquewhite;
+    border-radius: 25px;
+    width: 50%;
+    margin:auto;
+
 }

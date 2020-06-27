@@ -1,58 +1,71 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import extract_posts from './post.js'
-import FetchPost from './fetchPost.js'
 
-function Welcome(props) {
-    return (
-    <div>
-        <h1>Welcome to Detox</h1>
-    </div>);
+function Welcome(){
+  const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+  return(
+    <div className="title">
+      <h1>Welcome to Detox</h1>
+      <h1>{date}</h1>
+    </div>
+  )
+}
+function Post(props){
+
+  return(
+    <div className="postContainer">
+      <h2>{props.post['title']}</h2>
+      <p>{props.post['selftext']}</p>
+    </div>
+  )
 }
 
-class Post extends React.Component {
-    constructor(props) {
-        super(props);
-        this.testVariable= "this is a test";
-        console.log(this.props)
-        ;(async () => {
-          console.log(await this.props.posts)  
-        })();
-    }
-
-    render() {
-        return (
-        <div>
-            <h1>PostInfo</h1>
-            <p>{this.testVariable}</p>
-        </div>
-        );
-    }
-    
-}
-
-class Next extends React.Component {
-    state ={
-
-    }
-    handleClick = () => { 
-        console.log("test()")
-    }
-    render() {
-        return (
-          <button onClick={this.handleClick}>Next</button>
-        );
-    }
-}
 
 class Page extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      index: 0,
+      posts: [{
+        title: "Title1",
+        selftext: "Selftext1"
+      },{
+        title: "Title2",
+        selftext: "Selftext2"
+      }]
+    };
+  }
+  renderButton(){
+    return(
+      <button onClick={() => this.handleClick()}>Next Post</button>
+    );
+  }
+  handleClick(){
+    this.incIndex();
+  }
+  incIndex(){
+    console.log(this.state.index)
+    console.log(this.state.posts.length)
+    if (this.state.index >= this.state.posts.length -  1) {
+      this.setState({
+        index: 0
+      })
+    } else {
+      this.setState({
+        index: this.state.index +1
+      })
+    }
+  }
+
   render() {
     return (
-      <div className="board">
+      <div className="mainContainer">
           <Welcome />
-          <FetchPost />
-          <Next />
+          <Post 
+            post={this.state.posts[this.state.index]}
+          />
+          {this.renderButton()}
       </div>
     );
   }
