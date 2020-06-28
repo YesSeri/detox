@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import './index.css'
+
+import snoowrap from 'snoowrap';
+import oauth from '../oauth.json';
 
 function Welcome(){
   const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
@@ -11,8 +15,8 @@ function Welcome(){
     </div>
   )
 }
-function Post(props){
 
+function Post(props){
   return(
     <div className="postContainer">
       <h2>{props.post['title']}</h2>
@@ -25,6 +29,7 @@ function Post(props){
 class Page extends React.Component {
   constructor(props){
     super(props)
+    this.snoowrapUser = new snoowrap(oauth)
     this.state = {
       index: 0,
       posts: [{
@@ -36,17 +41,22 @@ class Page extends React.Component {
       }]
     };
   }
+
   renderButton(){
     return(
       <button onClick={() => this.handleClick()}>Next Post</button>
     );
   }
+
   handleClick(){
     this.incIndex();
   }
+
+  getPosts(){
+
+  }
+
   incIndex(){
-    console.log(this.state.index)
-    console.log(this.state.posts.length)
     if (this.state.index >= this.state.posts.length -  1) {
       this.setState({
         index: 0

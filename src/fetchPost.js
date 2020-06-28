@@ -12,7 +12,7 @@ export default class FetchPost extends React.Component {
       {
         title: "title2",
         selftext: "selftext",},
-    ]};
+  ]};
 
   // async componentDidMount(){
   //   const url = "https://www.reddit.com/r/aww/top/.json?sort=top&t=year&limit=10";
@@ -36,6 +36,9 @@ export default class FetchPost extends React.Component {
   //     created: this.posts['data']['children'][i]['data']['created'],
   //   });
   // }
+    show_next(){
+
+    }
 
   render() {
     if (this.state.loading) {
